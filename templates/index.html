@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tweet Generator</title>
+        <link rel="stylesheet" href="/static/styles/index.css">
+        <script>
+            function getUser() {
+                var user = document.getElementById("search").innerHTML;
+                var formInfo = document.forms['mainDiv'];
+                formInfo.userValue.value = user;
+            }
+        </script>
+    </head>
+    <body>
+        <form id="mainDiv" method="post" onclick="getUser()">
+            <h1>Tweet Generator</h1>
+            <h2>Enter a handle to generate a new tweet based off existing tweets!</h2>
+            <div>
+                <p id="at">
+                    @<span contentEditable="true" onfocus="this.innerHTML=''" name="search" id="search">{{user}}</span>
+                </p>
+                <p id="p-button">
+                    <input type="hidden" name="userValue" value=""/>
+                    <button>{{button_name}}</button>
+                </p>
+            </div>
+            <h2 class="tweet">{{tweet}}</h2>
+        </form>
+    </body>
+</html>

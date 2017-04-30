@@ -1,0 +1,83 @@
+body {
+    background: url(../background.png);
+    background-size: 1300px 700px;
+    background-repeat: no-repeat;
+}
+
+#mainDiv {
+    text-align: center;
+    align-items: center;
+}
+
+#at span{
+    font-family: "Verdana";
+    color: #432108;
+    font-size: 32px;
+    padding: 0.25em;
+    border: white;
+}
+
+#at span:focus {
+    outline: 0;
+}
+
+
+#at {
+    font-family: "Verdana";
+    color: #432108;
+    font-size: 32px;
+    border-radius: 7px;
+    border-color: #432108;
+    border-style: solid;
+    padding: 0.25em;
+    background: white;
+    width:400px;
+    text-align:left;
+    margin:auto;
+    margin-top: 2em;
+}
+
+h1 {
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 91.25px;
+    color: #432108;
+}
+
+h2 {
+    font-family: "Verdana";
+    font-weight: bold;
+    color: #432108;
+}
+
+button {
+    font-size: 30px;
+    font-family:"Verdana";
+    padding: 0.25em;
+    border-radius: 7px;
+    background: #432108;
+    border-color: white;
+    color: white;
+    border-style: solid;
+    margin-top: 1em;
+    cursor: pointer;
+}
+
+.tweet {
+    margin-top: 3em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
