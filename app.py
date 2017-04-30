@@ -30,7 +30,7 @@ def index():
                           u'\u2600-\u26FF\u2700-\u27BF]+',
                           re.UNICODE)
 
-        other_pattern = re.compile(r'@\w+\s?|\s?http[\w:/\.]+|\*|"|\(|\)|:\)|:\(|-')
+        other_pattern = re.compile(r'@\w+\s?|\s?http[\w:/\.]+|\*|"|\(|\)|:\)|:\(|-|amp;')
 
         try:
             for status in tweepy.Cursor(api.user_timeline, screen_name=user, include_rts=False).items(500):
@@ -45,7 +45,7 @@ def index():
                 tweet_string += tweet + " "
 
             # make word all lowercase unless it's all uppercase
-            tweet_string = " ".join([(w.lower() if w != w.upper() else w) for w in tweet_string.split()])
+            tweet_string = " ".join([(w.lower() if w != w.upper() else w) for w in tweet_string.split(" ")])
 
             fake_tweet = get_tweet(tweet_string)
 
