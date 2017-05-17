@@ -14,13 +14,12 @@ body {
     color: #432108;
     font-size: 32px;
     padding: 0.25em;
-    border: white;
+    border:white;
 }
 
-#at span:focus {
+#search:focus {
     outline: 0;
 }
-
 
 #at {
     font-family: "Verdana";
@@ -62,10 +61,47 @@ button {
     border-style: solid;
     margin-top: 1em;
     cursor: pointer;
+    box-shadow: 0 6px #1d959c;
 }
 
 .tweet {
     margin-top: 3em;
+}
+
+button:hover {
+    background: #552a0a;
+}
+
+button:active {
+    background-color: #552a0a;
+    box-shadow: 0 3px #198086;
+    transform: translateY(3px);
+}
+
+.loader {
+    border: 14px solid #432108;
+    border-top: 14px solid #ffffff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    display: none;
+    margin: auto;
+    margin-top: -1em;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 0.25em;
+    font-family: "Verdana";
+    color: #432108;
+    font-size: 12px;
 }
 
 

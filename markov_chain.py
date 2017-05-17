@@ -1,6 +1,6 @@
 import random
 
-def get_tweet(longtweet):
+def get_dict(longtweet):
     #Takes list of tweets and returns a random tweet using a markov chain algorithm
 
     #First lets build out dictionaries!
@@ -11,7 +11,7 @@ def get_tweet(longtweet):
     #This dictionary will contain words as keys and words that may follow it as values
     #This dictionary should contain multiples if necessary
 
-    longtweet_list = longtweet.split()
+    longtweet_list = longtweet
 	
     # $ means words at the beginning of a sentence
     dict1 = {"$": [longtweet_list[0]], longtweet_list[0]: []}
@@ -31,8 +31,8 @@ def get_tweet(longtweet):
 
         word_before_value.append(longtweet_list[i])
 
-    tweet = gen_markov_tweet(dict1)
-    return tweet
+    #tweet = gen_markov_tweet(dict1)
+    return dict1
 
 def gen_markov_tweet(dict1):
     #Takes the dictionary formed from the build_markov_model function
@@ -74,6 +74,6 @@ def gen_markov_tweet(dict1):
             working = False
 
     # capitalize
-    markov_tweet[0] = markov_tweet[0].title()
+    markov_tweet[0] = markov_tweet[0][0].upper() + markov_tweet[0][1:]
     final = " ".join(markov_tweet)
     return final

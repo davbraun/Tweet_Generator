@@ -4,28 +4,91 @@
         <meta charset="UTF-8">
         <title>Tweet Generator</title>
         <link rel="stylesheet" href="/static/styles/index.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>
-            function getUser() {
-                var user = document.getElementById("search").innerHTML;
-                var formInfo = document.forms['mainDiv'];
-                formInfo.userValue.value = user;
+            function submitForm() {
+                // set some variables
+                var button = $("#theButton");
+                var loader = $("#loader");
+                var span = $("#search");
+                var tweet = $("#tweet");
+                var handle = span.text();
+
+                // check if we are processing a new user
+                var needToLoad = (handle !== window.lastUser);
+
+                // show loader and disable inputs
+                if (needToLoad) {
+                    loader.show();
+                    button.prop('disabled', true);
+                    button.text("Loading...");
+                    tweet.text("");
+                    span.prop("contentEditable", false);
+                }
+
+                // make request
+                $.ajax({
+                    type: "POST",
+                    url: "/",
+                    data: {handle: handle, lastUser: window.lastUser, lastUserDict: window.lastUserDict},
+                    success: function(data) {
+                        // parse json
+                        var jsonData = JSON.parse(data);
+
+                        // enable everything again
+                        loader.hide();
+                        button.text("Again!");
+                        button.prop("disabled", false);
+
+                        // place data on the page and set globals
+                        tweet.text(jsonData.tweet);
+                        span.text(jsonData.handle);
+                        window.lastUser = jsonData.handle;
+                        window.lastUserDict = jsonData.saved_dict;
+                    }
+                });
             }
+
+            function submitOnEnter(e) {
+                var key = e.which || e.keyCode;
+                if(key === 13) {
+                    e.preventDefault();
+                    submitForm();
+                }
+            }
+
+            function focusSpan(){
+                if ($("#theButton").text() !== "Loading...") {
+                    var search = $("#search");
+                    search.prop("contentEditable", true);
+                    search.focus();
+                }
+            }
+
+            function setGlobals() {
+                window.lastUser = "";
+                window.lastUserDict = "{}";
+            }
+
         </script>
     </head>
-    <body>
-        <form id="mainDiv" method="post" onclick="getUser()">
+    <body onload="setGlobals()">
+        <div id="mainDiv">
             <h1>Tweet Generator</h1>
             <h2>Enter a handle to generate a new tweet based off existing tweets!</h2>
             <div>
-                <p id="at">
-                    @<span contentEditable="true" onfocus="this.innerHTML=''" name="search" id="search">{{user}}</span>
+                <p id="at" onclick="focusSpan()">
+                    <span>@</span><span contentEditable="false" onfocus="this.innerHTML=''" id="search" onkeydown="submitOnEnter(event)">{{user}}</span>
                 </p>
                 <p id="p-button">
-                    <input type="hidden" name="userValue" value=""/>
-                    <button>{{button_name}}</button>
+                    <button id="theButton" onclick="submitForm()">{{button_name}}</button>
                 </p>
             </div>
-            <h2 class="tweet">{{tweet}}</h2>
-        </form>
+            <h2 class="tweet" id="tweet">{{tweet}}</h2>
+            <div class="loader" id="loader"></div>
+        </div>
     </body>
+    <div class="footer">
+        Created in 2017 by David Braunstein and Sarah Lucca
+    </div>
 </html>
