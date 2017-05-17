@@ -1,4 +1,3 @@
-# Tweet_Creator
-BostonHacks 2017 Project
+# Tweet_Generator
 
-Generate a new tweet based of a user's existing tweets. By David Braunstein and Sarah Lucca.
+A web app to generate new tweets from a user's existing tweets. Created by David Braunstein and Sarah Lucca for BostonHacks 2017.
