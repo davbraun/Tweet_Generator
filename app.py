@@ -21,7 +21,6 @@ def index():
         user_input = html.escape(request.form['handle'])
         handle = "@" + user_input
         saved_dict = eval(request.form['lastUserDict'])
-        print(request.form)
 
         if request.form['lastUser'] != user_input or user_input == "" or saved_dict == {}:
             # user entered new handle
@@ -30,14 +29,19 @@ def index():
                 saved_dict = get_dict(tweet_list)
                 fake_tweet = gen_markov_tweet(saved_dict)
 
-            except TweepError:
-                # invalid handle
-                fake_tweet = "User not found! Please try another handle."
+            except TweepError as err:
+                # invalid or private handle
+
+                if str(err) == "User is protected":
+                    fake_tweet = "Error! User is private."
+                else:
+                    fake_tweet = "User not found! Please try another handle."
+
                 saved_dict = {}
 
             except ValueError:
                 # empty handle
-                fake_tweet = "Please enter a non-empty sequence."
+                fake_tweet = "Please enter a handle."
                 saved_dict = {}
         else:
             # user re-entered handle - use saved dict

@@ -1,5 +1,5 @@
 body {
-    background: url(../background.png);
+    background: url(../img/background.png);
     background-size: 1300px 700px;
     background-repeat: no-repeat;
 }
@@ -103,17 +103,3 @@ button:active {
     color: #432108;
     font-size: 12px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

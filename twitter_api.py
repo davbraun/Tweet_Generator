@@ -17,12 +17,12 @@ def get_tweets(handle):
         auth.set_access_token(Secrets.access_token, Secrets.access_token_secret)
 
         api = tweepy.API(auth)
-
+        
         # check if they're protected
         is_protected = api.get_user(handle).protected
 
         if is_protected:
-            raise TweepError("Trying to access protected user")
+            raise TweepError("User is protected")
 
         # pre-compile regex pattern
         regex_pattern = re.compile(r"""
@@ -33,7 +33,6 @@ def get_tweets(handle):
                                     |\(|\)               # parentheses
                                     |\[|\]               # brackets
                                     |:\)|:\(             # smiley faces
-                                    |-                   # dashes
                                     |,                   # commas
                                     |…                   # ...
                                     |&[A-Za-z;]+         # html special entities
@@ -58,13 +57,13 @@ def get_cleaned_list(tweet, regex_pattern):
         :return: cleaned tweet, represented as a list
     """
 
-    words = re.sub(regex_pattern, "", tweet)
-    words = words.split()
+    tweet = re.sub(regex_pattern, "", tweet)
+    words = tweet.split()
 
     for i in range(len(words)):
         # if a word isn't all capitals, make it all lowercase
-        if words[i].upper() != words[i]:
-            words[i] = words[i].lower()
+        #if words[i].upper() != words[i]:
+        #    words[i] = words[i].lower()
 
         # strip whitespace
         words[i] = words[i].strip()
@@ -82,3 +81,4 @@ def get_cleaned_list(tweet, regex_pattern):
             words[-1] = words[-1][:-1] + "."
 
     return words
+

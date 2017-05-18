@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Tweet Generator</title>
         <link rel="stylesheet" href="/static/styles/index.css">
+        <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>
             function submitForm() {
@@ -78,7 +79,7 @@
             <h2>Enter a handle to generate a new tweet based off existing tweets!</h2>
             <div>
                 <p id="at" onclick="focusSpan()">
-                    <span>@</span><span contentEditable="false" onfocus="this.innerHTML=''" id="search" onkeydown="submitOnEnter(event)">{{user}}</span>
+                    <span>@</span><span contentEditable="false" id="search" onkeydown="submitOnEnter(event)">{{user}}</span>
                 </p>
                 <p id="p-button">
                     <button id="theButton" onclick="submitForm()">{{button_name}}</button>
